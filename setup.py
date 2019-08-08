@@ -33,7 +33,7 @@ plugin_url = "https://github.com/kkaleta/OctoBNK"
 plugin_license = "AGPLv3"
 
 # Any additional requirements besides OctoPrint should be listed here
-#plugin_requires = ["requests", "pushbullet.py"]
+plugin_requires = ["requests", "pushbullet.py"]
 
 ### --------------------------------------------------------------------------------------------------------------------
 ### More advanced options that you usually shouldn't have to touch follow after this point
