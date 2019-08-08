@@ -23,17 +23,17 @@ $(function() {
                     if (response.result) {
                         new PNotify({
                             title: gettext("Test message sent"),
-                            text: gettext("A test message was sent to Pushbullet"),
+                            text: gettext("A test message was sent to OctoBlynk"),
                             type: "success"
                         });
                     } else {
                         var text;
                         if (response.error === "channel") {
-                            text = gettext("Test message could not be sent to Pushbullet due to the channel being unknown, check your settings");
+                            text = gettext("Test message could not be sent to OctoBlynk due to the channel being unknown, check your settings");
                         } else if (response.error === "apikey") {
-                            text = gettext("Test message could not be sent to Pushbullet due to an invalid Access Token, check your settings");
+                            text = gettext("Test message could not be sent to OctoBlynk due to an invalid Access Token, check your settings");
                         } else {
-                            text = gettext("Test message could not be sent to Pushbullet, check log & your settings");
+                            text = gettext("Test message could not be sent to OctoBlynk, check log & your settings");
                         }
                         new PNotify({
                             title: gettext("Test message could not be sent"),

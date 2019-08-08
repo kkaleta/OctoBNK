@@ -80,7 +80,7 @@ def _get_eta_from_seconds(seconds, default=None):
 		return time.strftime(_ETA_STRFTIME, target_time)
 
 
-class PushbulletPlugin(octoprint.plugin.EventHandlerPlugin,
+class OctoBlynkPlugin(octoprint.plugin.EventHandlerPlugin,
                        octoprint.plugin.ProgressPlugin,
                        octoprint.plugin.SettingsPlugin,
                        octoprint.plugin.StartupPlugin,
@@ -106,7 +106,7 @@ class PushbulletPlugin(octoprint.plugin.EventHandlerPlugin,
 			self._logger.warn("Could not find channel {}, please check your configuration!".format(channel_name))
 			self._bullet, self._sender = self._create_sender(apikey)
 		except pushbullet.InvalidKeyError:
-			self._logger.error("Invalid Pushbullet API key, please check your configuration!")
+			self._logger.error("Invalid OctoBlynk API key, please check your configuration!")
 			self._bullet = self._sender = None
 
 	#~~ progress message helpers
@@ -199,7 +199,7 @@ class PushbulletPlugin(octoprint.plugin.EventHandlerPlugin,
 
 	def get_template_configs(self):
 		return [
-			dict(type="settings", name="Pushbullet", custom_bindings=True)
+			dict(type="settings", name="OctoBlynk", custom_bindings=True)
 		]
 
 	#~~ AssetPlugin API
@@ -264,17 +264,17 @@ class PushbulletPlugin(octoprint.plugin.EventHandlerPlugin,
 	def get_update_information(self):
 		return dict(
 			octobullet=dict(
-				displayName="Pushbullet Plugin",
+				displayName="OctoBlynk Plugin",
 				displayVersion=self._plugin_version,
 
 				# version check: github repository
 				type="github_release",
 				user="OctoPrint",
-				repo="OctoPrint-Pushbullet",
+				repo="OctoPrint-OctoBlynk",
 				current=self._plugin_version,
 
 				# update method: pip
-				pip="https://github.com/OctoPrint/OctoPrint-Pushbullet/archive/{target_version}.zip"
+				pip="https://github.com/OctoPrint/OctoPrint-OctoBlynk/archive/{target_version}.zip"
 			)
 		)
 
@@ -381,7 +381,7 @@ class PushbulletPlugin(octoprint.plugin.EventHandlerPlugin,
 			sender.push_file(file_data["file_name"], file_data["file_url"], file_data["file_type"], body=body)
 			return True
 		except Exception as e:
-			self._logger.exception("Exception while uploading snapshot to Pushbullet, sending only a note: {message}".format(message=str(e)))
+			self._logger.exception("Exception while uploading snapshot to OctoBlynk, sending only a note: {message}".format(message=str(e)))
 			return False
 		finally:
 			try:
@@ -453,10 +453,10 @@ class NoSuchChannel(Exception):
 		self.channel = channel
 
 
-__plugin_name__ = "Pushbullet"
+__plugin_name__ = "OctoBlynk"
 def __plugin_load__():
 	global __plugin_implementation__
-	__plugin_implementation__ = PushbulletPlugin()
+	__plugin_implementation__ = OctoBlynkPlugin()
 
 	global __plugin_hooks__
 	__plugin_hooks__ = {
